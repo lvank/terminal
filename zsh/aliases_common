@@ -1,0 +1,24 @@
+# terminal tool alternatives
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lah'
+alias ls='exa --color=auto'
+alias df=duf
+alias cat=bat
+alias gi='rg -i'
+
+# tmux
+alias ta='tmux attach'
+
+# git
+alias gs='git status'
+alias gst='git status'
+
+# zsh directory stack, lets you use 'd' to view dir stack and 1-9 to select a dir
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# ripgrep pager
+function rgp() {
+    rg -p $@ | bat
+}

@@ -1,0 +1,4 @@
+zsh/.zcompdump
+zsh/plugins/*
+!zsh/plugins/install.sh
+ranger/rifle.conf

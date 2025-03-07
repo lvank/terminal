@@ -1,0 +1,33 @@
+# plugin config
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243,bold"
+
+# terminal prompt
+fpath=($ZDOTDIR/zfunc $fpath)
+autoload -U compinit; compinit
+autoload -Uz purification && purification
+
+# plugins
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/plugins/bd/bd.zsh
+source <(fzf --zsh)
+
+# special prompt for ranger
+if [ -n "$RANGER_LEVEL" ]; then
+        export PROMPT="%F{white}[RANGER] %~ %B%F{blue}>%f%b "
+fi
+
+setopt AUTO_CD              # automatically cd when possible
+setopt AUTO_PUSHD           # Push the current directory visited on the stack.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+setopt HIST_IGNORE_ALL_DUPS # No zsh history duplicates
+
+function sudo_hkey(){ BUFFER="sudo $BUFFER"; zle accept-line; }
+zle -N sudo_hkey
+bindkey "^[r" sudo_hkey #alt+R will add 'sudo' to front of currently typed command and execute
+bindkey "^[e" _expand_alias #alt+E
+bindkey "^[[1;5C" forward-word #ctrl+right
+bindkey "^[[1;5D" backward-word #ctrl+left
+bindkey "^[[3~" delete-char #del
+bindkey "^[[H" beginning-of-line #home
+bindkey "^[[F" end-of-line #end
